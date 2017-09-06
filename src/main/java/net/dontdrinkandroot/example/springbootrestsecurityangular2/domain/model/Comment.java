@@ -2,6 +2,7 @@ package net.dontdrinkandroot.example.springbootrestsecurityangular2.domain.model
 
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.time.Instant;
@@ -10,6 +11,7 @@ import java.time.Instant;
  * @author Philip Washington Sorst <philip@sorst.net>
  */
 @Entity
+@EntityListeners(AuditingEntityListener.class)
 public class Comment
 {
     @GeneratedValue
@@ -29,6 +31,17 @@ public class Comment
 
     @Column(nullable = false)
     private String content;
+
+    public Comment()
+    {
+        /* Default Constructor */
+    }
+
+    public Comment(BlogPost blogPost, String content)
+    {
+        this.blogPost = blogPost;
+        this.content = content;
+    }
 
     public Long getId()
     {

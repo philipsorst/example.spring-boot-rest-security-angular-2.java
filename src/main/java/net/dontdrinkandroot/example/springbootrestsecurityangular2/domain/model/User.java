@@ -1,8 +1,6 @@
 package net.dontdrinkandroot.example.springbootrestsecurityangular2.domain.model;
 
-//import org.springframework.security.core.GrantedAuthority;
-//import org.springframework.security.core.userdetails.UserDetails;
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -30,6 +28,7 @@ public class User implements UserDetails
     private String username;
 
     @Column
+    @JsonIgnore
     private String password;
 
     @Column
@@ -47,12 +46,23 @@ public class User implements UserDetails
     @Column(nullable = false)
     private boolean admin = false;
 
+    public User()
+    {
+        /* Default Constructor */
+    }
+
+    public User(String username)
+    {
+        this.username = username;
+    }
+
     @Override
+    @JsonIgnore
     public Collection<? extends GrantedAuthority> getAuthorities()
     {
         List<GrantedAuthority> authorities = new ArrayList<>();
         authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
-        if (admin) {
+        if (this.admin) {
             authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
         }
 
@@ -62,36 +72,61 @@ public class User implements UserDetails
     @Override
     public String getPassword()
     {
-        return password;
+        return this.password;
     }
 
     @Override
     public String getUsername()
     {
-        return username;
+        return this.username;
     }
 
     @Override
     public boolean isAccountNonExpired()
     {
-        return null == expirationDate || !LocalDate.now().isAfter(expirationDate);
+        return null == this.expirationDate || !LocalDate.now().isAfter(this.expirationDate);
     }
 
     @Override
     public boolean isAccountNonLocked()
     {
-        return !locked;
+        return !this.locked;
     }
 
     @Override
     public boolean isCredentialsNonExpired()
     {
-        return null == credentialExpirationDate || !LocalDate.now().isAfter(credentialExpirationDate);
+        return null == this.credentialExpirationDate || !LocalDate.now().isAfter(this.credentialExpirationDate);
     }
 
     @Override
     public boolean isEnabled()
     {
-        return enabled;
+        return this.enabled;
+    }
+
+    public void setLocked(boolean locked)
+    {
+        this.locked = locked;
+    }
+
+    public void setEnabled(boolean enabled)
+    {
+        this.enabled = enabled;
+    }
+
+    public void setPassword(String password)
+    {
+        this.password = password;
+    }
+
+    public boolean isAdmin()
+    {
+        return this.admin;
+    }
+
+    public void setAdmin(boolean admin)
+    {
+        this.admin = admin;
     }
 }

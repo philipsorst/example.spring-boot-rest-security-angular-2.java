@@ -2,3 +2,10 @@ spring:
   data:
     rest:
       base-path: /api
+      detection-strategy: annotated
+  jpa:
+    show-sql: true
+server:
+  error:
+    whitelabel:
+      enabled: false
