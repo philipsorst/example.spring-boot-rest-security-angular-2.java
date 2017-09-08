@@ -11,7 +11,7 @@
     </parent>
 
     <groupId>net.dontdrinkandroot.example</groupId>
-    <artifactId>spring-boot-rest-security-angular-2</artifactId>
+    <artifactId>spring-boot-rest-security-angular</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
