@@ -55,10 +55,10 @@
                         <phase>generate-sources</phase>
                         <configuration>
                             <workingDirectory>${project.basedir}/angular/</workingDirectory>
-                            <executable>npm</executable>
+                            <executable>ng</executable>
                             <arguments>
-                                <argument>run-script</argument>
                                 <argument>build</argument>
+                                <argument>--prod</argument>
                             </arguments>
                         </configuration>
                         <goals>

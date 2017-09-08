@@ -5,7 +5,6 @@ import net.dontdrinkandroot.example.springbootrestsecurityangular.domain.model.C
 import net.dontdrinkandroot.example.springbootrestsecurityangular.domain.model.User;
 import net.dontdrinkandroot.example.springbootrestsecurityangular.domain.service.security.SecurityService;
 import org.springframework.context.ApplicationListener;
-import org.springframework.context.annotation.Profile;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -20,7 +19,6 @@ import javax.persistence.PersistenceContext;
  * @author Philip Washington Sorst <philip@sorst.net>
  */
 @Service
-@Profile("demodata")
 public class DemoDataInitService implements ApplicationListener<ContextRefreshedEvent>
 {
     @PersistenceContext
@@ -55,7 +53,8 @@ public class DemoDataInitService implements ApplicationListener<ContextRefreshed
 
         this.securityService.setCurrentUser(user1);
         BlogPost blogPost1 = new BlogPost();
-        blogPost1.setContent("Blog Post 1");
+        blogPost1.setTitle("Blog Post 1 Title");
+        blogPost1.setContent("Blog Post 1 Content");
         this.entityManager.persist(blogPost1);
 
         this.securityService.setCurrentUser(user2);
@@ -68,7 +67,8 @@ public class DemoDataInitService implements ApplicationListener<ContextRefreshed
 
         this.securityService.setCurrentUser(user2);
         BlogPost blogPost2 = new BlogPost();
-        blogPost2.setContent("Blog Post 2");
+        blogPost2.setTitle("Blog Post 2 Title");
+        blogPost2.setContent("Blog Post 2 Content");
         this.entityManager.persist(blogPost2);
 
         this.securityService.setCurrentUser(null);

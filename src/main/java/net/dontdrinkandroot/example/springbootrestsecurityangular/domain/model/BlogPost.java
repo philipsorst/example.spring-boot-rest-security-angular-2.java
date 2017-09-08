@@ -33,6 +33,9 @@ public class BlogPost
     private Instant lastModified;
 
     @Column(nullable = false)
+    private String title;
+
+    @Column(nullable = false)
     private String content;
 
     @OneToMany(mappedBy = "blogPost")
@@ -61,6 +64,16 @@ public class BlogPost
     public Instant getLastModified()
     {
         return this.lastModified;
+    }
+
+    public String getTitle()
+    {
+        return this.title;
+    }
+
+    public void setTitle(String title)
+    {
+        this.title = title;
     }
 
     public String getContent()
